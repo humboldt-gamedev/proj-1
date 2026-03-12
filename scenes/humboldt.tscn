@@ -1,7 +1,9 @@
 [gd_scene format=3 uid="uid://mmsg0glr6j8y"]
 
 [ext_resource type="Script" uid="uid://bgv83ui1sq2qq" path="res://scripts/player.gd" id="1_0l8tv"]
+[ext_resource type="Material" uid="uid://bm5n8d42i0nkf" path="res://materials/ground.tres" id="1_0mn4i"]
 [ext_resource type="Script" uid="uid://dt7bpk2igm06y" path="res://scripts/neck.gd" id="2_vid5m"]
+[ext_resource type="PackedScene" uid="uid://m4rxapv8ud4h" path="res://scenes/bss.tscn" id="3_vid5m"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_njsn1"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -17,10 +19,10 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_2d4dk"]
-size = Vector3(20, 1, 20)
+size = Vector3(50, 1, 40)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_4amh0"]
-points = PackedVector3Array(-10, -0.5, -10, -10, 0.5, -10, 10, -0.5, -10, -10, -0.5, 10, -10, 0.5, 10, 10, 0.5, -10, 10, -0.5, 10, 10, 0.5, 10)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0mn4i"]
+points = PackedVector3Array(-25, -0.5, -20, -25, 0.5, -20, 25, -0.5, -20, -25, -0.5, 20, -25, 0.5, 20, 25, 0.5, -20, 25, -0.5, 20, 25, 0.5, 20)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_2d4dk"]
 
@@ -39,10 +41,11 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.50362134, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=87049502]
+material_override = ExtResource("1_0mn4i")
 mesh = SubResource("BoxMesh_2d4dk")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=1489327725]
-shape = SubResource("ConvexPolygonShape3D_4amh0")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=335760936]
+shape = SubResource("ConvexPolygonShape3D_0mn4i")
 
 [node name="Player" type="CharacterBody3D" parent="." unique_id=1577876413]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8624783, 0)
@@ -60,3 +63,6 @@ script = ExtResource("2_vid5m")
 [node name="CameraPivot" type="Node3D" parent="Player/Neck" unique_id=726305158]
 
 [node name="Camera" type="Camera3D" parent="Player/Neck/CameraPivot" unique_id=364558728]
+
+[node name="BSS" parent="." unique_id=1096450672 instance=ExtResource("3_vid5m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.521647, 0.048553944, -5.361934)
