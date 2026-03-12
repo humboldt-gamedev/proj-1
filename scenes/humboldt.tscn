@@ -17,6 +17,9 @@ background_mode = 2
 sky = SubResource("Sky_bqusr")
 tonemap_mode = 2
 glow_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.5176471, 0.5529412, 0.60784316, 1)
+fog_density = 0.02
 
 [sub_resource type="BoxMesh" id="BoxMesh_2d4dk"]
 size = Vector3(50, 1, 40)
