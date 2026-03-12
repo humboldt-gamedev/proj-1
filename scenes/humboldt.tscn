@@ -1,0 +1,62 @@
+[gd_scene format=3 uid="uid://mmsg0glr6j8y"]
+
+[ext_resource type="Script" uid="uid://bgv83ui1sq2qq" path="res://scripts/player.gd" id="1_0l8tv"]
+[ext_resource type="Script" uid="uid://dt7bpk2igm06y" path="res://scripts/neck.gd" id="2_vid5m"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_njsn1"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_bqusr"]
+sky_material = SubResource("ProceduralSkyMaterial_njsn1")
+
+[sub_resource type="Environment" id="Environment_n60fd"]
+background_mode = 2
+sky = SubResource("Sky_bqusr")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_2d4dk"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_4amh0"]
+points = PackedVector3Array(-10, -0.5, -10, -10, 0.5, -10, 10, -0.5, -10, -10, -0.5, 10, -10, 0.5, 10, 10, 0.5, -10, 10, -0.5, 10, 10, 0.5, 10)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_2d4dk"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4amh0"]
+
+[node name="Humboldt" type="Node" unique_id=522849274]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2144033814]
+environment = SubResource("Environment_n60fd")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=241206100]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Ground" type="StaticBody3D" parent="." unique_id=599904243]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.50362134, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=87049502]
+mesh = SubResource("BoxMesh_2d4dk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=1489327725]
+shape = SubResource("ConvexPolygonShape3D_4amh0")
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=1577876413]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8624783, 0)
+script = ExtResource("1_0l8tv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=1098976175]
+mesh = SubResource("CapsuleMesh_2d4dk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=305716522]
+shape = SubResource("CapsuleShape3D_4amh0")
+
+[node name="Neck" type="Node3D" parent="Player" unique_id=1856969209]
+script = ExtResource("2_vid5m")
+
+[node name="CameraPivot" type="Node3D" parent="Player/Neck" unique_id=726305158]
+
+[node name="Camera" type="Camera3D" parent="Player/Neck/CameraPivot" unique_id=364558728]
