@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://bgv83ui1sq2qq" path="res://scripts/player.gd" id="1_0l8tv"]
 [ext_resource type="Material" uid="uid://bm5n8d42i0nkf" path="res://materials/ground.tres" id="1_0mn4i"]
 [ext_resource type="Script" uid="uid://dt7bpk2igm06y" path="res://scripts/neck.gd" id="2_vid5m"]
-[ext_resource type="PackedScene" uid="uid://m4rxapv8ud4h" path="res://scenes/bss.tscn" id="3_vid5m"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_njsn1"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -66,6 +65,3 @@ script = ExtResource("2_vid5m")
 [node name="CameraPivot" type="Node3D" parent="Player/Neck" unique_id=726305158]
 
 [node name="Camera" type="Camera3D" parent="Player/Neck/CameraPivot" unique_id=364558728]
-
-[node name="BSS" parent="." unique_id=1096450672 instance=ExtResource("3_vid5m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.521647, 0.048553944, -5.361934)
