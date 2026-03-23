@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://mmsg0glr6j8y"]
 
-[ext_resource type="Script" uid="uid://bgv83ui1sq2qq" path="res://scripts/player.gd" id="1_0l8tv"]
 [ext_resource type="Material" uid="uid://bm5n8d42i0nkf" path="res://materials/ground.tres" id="1_0mn4i"]
-[ext_resource type="Script" uid="uid://dt7bpk2igm06y" path="res://scripts/neck.gd" id="2_vid5m"]
+[ext_resource type="PackedScene" uid="uid://blsa6ccmfotj3" path="res://player/player.tscn" id="2_0l8tv"]
+[ext_resource type="PackedScene" uid="uid://by6t4045wju47" path="res://scenes/camera_zone.tscn" id="3_vid5m"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_njsn1"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -26,10 +26,6 @@ size = Vector3(50, 1, 40)
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0mn4i"]
 points = PackedVector3Array(-25, -0.5, -20, -25, 0.5, -20, 25, -0.5, -20, -25, -0.5, 20, -25, 0.5, 20, 25, 0.5, -20, 25, -0.5, 20, 25, 0.5, 20)
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_2d4dk"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4amh0"]
-
 [node name="Humboldt" type="Node" unique_id=522849274]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2144033814]
@@ -49,19 +45,26 @@ mesh = SubResource("BoxMesh_2d4dk")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=335760936]
 shape = SubResource("ConvexPolygonShape3D_0mn4i")
 
-[node name="Player" type="CharacterBody3D" parent="." unique_id=1577876413]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8624783, 0)
-script = ExtResource("1_0l8tv")
+[node name="Player" parent="." unique_id=419827584 groups=["player"] instance=ExtResource("2_0l8tv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.024644852, -0.0036215782, -0.13513136)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player" unique_id=1098976175]
-mesh = SubResource("CapsuleMesh_2d4dk")
+[node name="CameraZone 1" parent="." unique_id=1915208173 instance=ExtResource("3_vid5m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5564079, 0.63627005, 0.3318243)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=305716522]
-shape = SubResource("CapsuleShape3D_4amh0")
+[node name="CollisionShape3D" parent="CameraZone 1" index="0" unique_id=1237124750]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.98498535, 0.56326485, -0.07639313)
 
-[node name="Neck" type="Node3D" parent="Player" unique_id=1856969209]
-script = ExtResource("2_vid5m")
+[node name="Camera3D" parent="CameraZone 1" index="1" unique_id=2063745314]
+transform = Transform3D(1, 0, 0, 0, 0.8764244, 0.48153952, 0, -0.48153952, 0.8764244, 0.23348117, 2.1912508, 4.165275)
 
-[node name="CameraPivot" type="Node3D" parent="Player/Neck" unique_id=726305158]
+[node name="CameraZone 2" parent="." unique_id=1798996638 instance=ExtResource("3_vid5m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.494897, -0.0036206245, 0.059081078)
 
-[node name="Camera" type="Camera3D" parent="Player/Neck/CameraPivot" unique_id=364558728]
+[node name="CollisionShape3D" parent="CameraZone 2" index="0" unique_id=1237124750]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.115344, 0)
+
+[node name="Camera3D" parent="CameraZone 2" index="1" unique_id=2063745314]
+transform = Transform3D(0.22529113, 0, 0.9742915, 0, 1, 0, -0.9742915, 0, 0.22529113, 5.051811, 1.5705888, 2.3502767)
+
+[editable path="CameraZone 1"]
+[editable path="CameraZone 2"]

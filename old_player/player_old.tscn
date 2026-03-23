@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://dy3d63451xjmf"]
+
+[ext_resource type="Script" uid="uid://bgv83ui1sq2qq" path="res://old_player/player.gd" id="1_55kkx"]
+[ext_resource type="Script" uid="uid://dt7bpk2igm06y" path="res://old_player/neck.gd" id="2_4hkxp"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_2d4dk"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4amh0"]
+
+[node name="Player" type="CharacterBody3D" unique_id=1191738970]
+script = ExtResource("1_55kkx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1598878361]
+mesh = SubResource("CapsuleMesh_2d4dk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2102009609]
+shape = SubResource("CapsuleShape3D_4amh0")
+
+[node name="Neck" type="Node3D" parent="." unique_id=2058463306]
+script = ExtResource("2_4hkxp")
+
+[node name="CameraPivot" type="Node3D" parent="Neck" unique_id=1772362875]
+
+[node name="Camera" type="Camera3D" parent="Neck/CameraPivot" unique_id=1970048272]
