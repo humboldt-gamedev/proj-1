@@ -11,6 +11,9 @@ var prompt_label: Label3D
 #prompt offset for 3dtext placement
 @export var prompt_offset: Vector3= Vector3(0, -50, 0)
 
+@export_node_path var target_object: NodePath
+var target
+
 var player_present: bool = false
 
 # Called when the node enters the scene tree for the first time.
@@ -27,17 +30,21 @@ func _on_body_entered(body: Node) -> void:
 		if body.is_in_group("player"):
 			player_present = true
 			
-			# gets relevant position data for 3d text
-			var camera := get_current_camera()
-			var forward := -camera.global_transform.basis.z
-			var world_offset := camera.global_position + forward + prompt_offset
+			var target := get_node(target_object)
 			
-			#applies to 3d text
-			if prompt_label:
-				prompt_label.global_position = world_offset
-				prompt_label.text = prompt_text
-				prompt_label.visible = true
+			if is_instance_valid(target):
 				
+				# gets relevant position data for 3d text
+				var camera := get_current_camera()
+				var forward := -camera.global_transform.basis.z
+				var world_offset := camera.global_position + forward + prompt_offset
+				
+				#applies to 3d text
+				if prompt_label:
+					prompt_label.global_position = world_offset
+					prompt_label.text = prompt_text
+					prompt_label.visible = true
+					
 
 func get_current_camera() -> Camera3D:
 	var viewport := get_viewport()
@@ -52,13 +59,16 @@ func _on_body_exited(body: Node) -> void:
 		
 		#hides text
 		if prompt_label:
-			prompt_label.visible = false;
+			prompt_label.visible = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	# Handles the different actions given
 	# by Interaction Type
-	if player_present and Input.is_action_just_pressed("interact"):
+	if player_present and Input.is_action_just_pressed("interact") and prompt_label.visible == true:
+		
+		var target := get_node(target_object)
+		
 		match InteractType:
 			#I figure these branches can access a connected object's code for modularity
 			#rather than hard coding design in, creeate a generic interaction script that allows
@@ -67,6 +77,14 @@ func _process(delta: float) -> void:
 			InteractionType.PICKUP_ITEM:
 				#branch for pickup Item code
 				print("Item (theoretically) picked up!")
+				
+				if target.has_method("pickup"):
+					target.pickup()
+					target.queue_free()
+					prompt_label.visible = false;
+				else:
+					push_warning("Target does not have 'pickup' method.")
+				
 			InteractionType.INVENTORY_ADD:
 				#branch for add to inventory code
 				pass

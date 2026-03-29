@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://blsa6ccmfotj3" path="res://player/player.tscn" id="2_0l8tv"]
 [ext_resource type="PackedScene" uid="uid://bopa6r1mrff6k" path="res://scenes/interacion_zone.tscn" id="2_0mn4i"]
 [ext_resource type="PackedScene" uid="uid://by6t4045wju47" path="res://scenes/camera_zone.tscn" id="3_vid5m"]
+[ext_resource type="Script" uid="uid://ctox0rnj0vdms" path="res://scripts/interactable.gd" id="5_mmslu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_njsn1"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -27,10 +28,15 @@ size = Vector3(50, 1, 40)
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_0mn4i"]
 points = PackedVector3Array(-25, -0.5, -20, -25, 0.5, -20, 25, -0.5, -20, -25, -0.5, 20, -25, 0.5, 20, 25, 0.5, -20, 25, -0.5, 20, 25, 0.5, 20)
 
+[sub_resource type="SphereMesh" id="SphereMesh_mmslu"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0mn4i"]
+
 [node name="Humboldt" type="Node" unique_id=522849274]
 
 [node name="Interacion Zone" parent="." unique_id=2077846025 instance=ExtResource("2_0mn4i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.513704, 0.8478153, -0.27566338)
+target_object = NodePath("../RigidBody3D")
 
 [node name="CollisionShape3D" parent="Interacion Zone" index="0" unique_id=1064221417]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.91934204, 0, 0.10168457)
@@ -72,6 +78,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.115344, 0)
 
 [node name="Camera3D" parent="CameraZone 2" index="1" unique_id=2063745314]
 transform = Transform3D(0.22529113, 0, 0.9742915, 0, 1, 0, -0.9742915, 0, 0.22529113, 5.051811, 1.5705888, 2.3502767)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=1743015736]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.29186487, 0, 0)
+script = ExtResource("5_mmslu")
+interact_name = "Pickup Ball"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D" unique_id=436409805]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.096954, 1.3569527, 0)
+mesh = SubResource("SphereMesh_mmslu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=806727628]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.096954, 1.3569527, 0)
+shape = SubResource("SphereShape3D_0mn4i")
 
 [editable path="Interacion Zone"]
 [editable path="CameraZone 1"]
