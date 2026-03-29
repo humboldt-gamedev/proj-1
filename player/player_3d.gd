@@ -4,9 +4,9 @@ extends CharacterBody3D
 var movement_basis: Basis
 
 # Global paramaters for character movement
-const SPEED = 3
-const ROTATION_SPEED = 2.7
-const JUMP_VELOCITY = 4.5
+@export var SPEED = 3
+@export var ROTATION_SPEED = 2.7
+@export var JUMP_VELOCITY = 4.5
 
 
 func _physics_process(delta: float) -> void:

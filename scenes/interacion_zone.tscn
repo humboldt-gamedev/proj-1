@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bopa6r1mrff6k"]
+
+[ext_resource type="Script" uid="uid://ducu7f5r0bpsh" path="res://scenes/interacion_zone.gd" id="1_n0rgq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nhqxr"]
+size = Vector3(4.2020874, 1, 7.0144043)
+
+[node name="Interacion Zone" type="Area3D" unique_id=2077846025]
+script = ExtResource("1_n0rgq")
+prompt_text = "Press E to interact"
+prompt_label_path = NodePath("InteractionPrompt")
+prompt_offset = Vector3(0, -0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1064221417]
+shape = SubResource("BoxShape3D_nhqxr")
+debug_color = Color(0.09019608, 0.6313726, 0, 1)
+
+[node name="InteractionPrompt" type="Label3D" parent="." unique_id=2045761788]
+visible = false
+billboard = 1
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
