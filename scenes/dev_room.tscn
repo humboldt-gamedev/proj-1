@@ -1,3 +1,15 @@
 [gd_scene format=3 uid="uid://bwtjccl2baqqu"]
 
+[ext_resource type="PackedScene" uid="uid://bbnc0oi8xt0ro" path="res://assets/terrain/terrain.gltf" id="1_p6lu6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ftwh6"]
+
 [node name="DevRoom" type="Node" unique_id=510363067]
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=1145648987]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor" unique_id=689098269]
+mesh = SubResource("BoxMesh_ftwh6")
+
+[node name="terrains" parent="." unique_id=932616168 instance=ExtResource("1_p6lu6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7389152, 0, 0.25634056)
