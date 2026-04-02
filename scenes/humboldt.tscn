@@ -63,7 +63,7 @@ shape = SubResource("ConvexPolygonShape3D_0mn4i")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.024644852, -0.0036215782, -0.13513136)
 
 [node name="CameraZone 1" parent="." unique_id=1915208173 instance=ExtResource("3_vid5m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5564079, 0.63627005, 0.3318243)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.121141, 0.6362691, -9.4292345)
 
 [node name="CollisionShape3D" parent="CameraZone 1" index="0" unique_id=1237124750]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.98498535, 0.56326485, -0.07639313)
