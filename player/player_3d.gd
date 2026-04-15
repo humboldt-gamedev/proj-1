@@ -38,8 +38,8 @@ func _physics_process(delta: float) -> void:
 	
 	match current_camera_mode:
 		CameraMode.PLAYER:
-			if not is_on_floor():
-				velocity += get_gravity() * delta
+			#if not is_on_floor():
+				#velocity += get_gravity() * delta
 			
 			if Input.is_action_just_pressed("jump") and is_on_floor():
 				velocity.y = JUMP_VELOCITY
@@ -99,6 +99,10 @@ func _physics_process(delta: float) -> void:
 		
 	
 	move_and_slide()
+
+func set_camera_mode_player():
+	current_camera_mode = CameraMode.PLAYER
+	player_camera.get_camera().current = true
 
 func set_camera_mode_corridor():
 	current_camera_mode = CameraMode.CORRIDOR
