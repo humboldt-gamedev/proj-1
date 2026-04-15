@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://blsa6ccmfotj3" path="res://player/player.tscn" id="2_0l8tv"]
 [ext_resource type="PackedScene" uid="uid://bopa6r1mrff6k" path="res://scenes/interacion_zone.tscn" id="2_0mn4i"]
 [ext_resource type="PackedScene" uid="uid://by6t4045wju47" path="res://scenes/camera_zone.tscn" id="3_vid5m"]
+[ext_resource type="PackedScene" uid="uid://nnmoahp0jfmh" path="res://player/player_camera.tscn" id="4_y541u"]
 [ext_resource type="Script" uid="uid://ctox0rnj0vdms" path="res://scripts/interactable.gd" id="5_mmslu"]
 [ext_resource type="PackedScene" uid="uid://bdl0efgy8h7po" path="res://scenes/gist_hall.tscn" id="6_jmbf8"]
 
@@ -61,6 +62,11 @@ shape = SubResource("ConvexPolygonShape3D_0mn4i")
 
 [node name="Player" parent="." unique_id=419827584 groups=["player"] instance=ExtResource("2_0l8tv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.024644852, -0.0036215782, -0.13513136)
+
+[node name="CameraPos" type="Node3D" parent="Player" unique_id=1309599296]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.869063, 0)
+
+[node name="PlayerCamera" parent="." unique_id=454988981 instance=ExtResource("4_y541u")]
 
 [node name="CameraZone 1" parent="." unique_id=1915208173 instance=ExtResource("3_vid5m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.121141, 0.6362691, -9.4292345)

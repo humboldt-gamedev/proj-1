@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
-@onready var camera: Camera3D = get_viewport().get_camera_3d()
-@onready var player_camera: Camera3D = $PlayerCamera/Pivot/Camera
+@onready var current_camera: Camera3D = get_viewport().get_camera_3d()
+@onready var player_camera: Node3D = $"../PlayerCamera"
 var movement_basis: Basis
 
 enum CameraMode {PLAYER, CORRIDOR}
@@ -26,15 +26,15 @@ func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	
 	if Input.is_action_just_pressed("toggle_camera"):
-		camera = player_camera
-		player_camera.current = true
+		current_camera = player_camera.get_camera()
+		current_camera.current = true
 		current_camera_mode = CameraMode.PLAYER
-		movement_basis = camera.global_transform.basis
+		movement_basis = current_camera.global_transform.basis
 	
 	# sets camera bias to current 3d camera
-	if camera != get_viewport().get_camera_3d():
-		camera = get_viewport().get_camera_3d()
-		movement_basis = camera.global_transform.basis
+	if current_camera != get_viewport().get_camera_3d():
+		current_camera = get_viewport().get_camera_3d()
+		movement_basis = current_camera.global_transform.basis
 	
 	match current_camera_mode:
 		CameraMode.PLAYER:
@@ -44,7 +44,7 @@ func _physics_process(delta: float) -> void:
 			if Input.is_action_just_pressed("jump") and is_on_floor():
 				velocity.y = JUMP_VELOCITY
 			
-			var direction: Vector3 = ($PlayerCamera.global_basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+			var direction: Vector3 = (player_camera.get_basis() * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 			if direction:
 				velocity.x = direction.x * SPEED
 				velocity.z = direction.z * SPEED
@@ -55,6 +55,10 @@ func _physics_process(delta: float) -> void:
 				xz = xz.move_toward(Vector2.ZERO, SPEED * 2 * delta)
 				velocity.x = xz.x
 				velocity.z = xz.y
+			
+			if direction:
+				var target_angle = atan2(direction.x, direction.z)
+				rotation.y = lerp_angle(rotation.y, target_angle, delta * ROTATION_SPEED)
 		
 		CameraMode.CORRIDOR:
 			# when not moving, slow velocity towards zero vector
@@ -62,7 +66,7 @@ func _physics_process(delta: float) -> void:
 				velocity = velocity.move_toward(Vector3.ZERO, SPEED * delta * 2)
 			else:
 				if movement_basis == Basis():
-					movement_basis = camera.global_transform.basis
+					movement_basis = current_camera.global_transform.basis
 				
 				# calculate facing direction of camera and assign it to movement_basis
 				var camera_forward = -movement_basis.z

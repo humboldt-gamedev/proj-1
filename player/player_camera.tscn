@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://nnmoahp0jfmh"]
+
+[ext_resource type="Script" uid="uid://0xlos6pjpffh" path="res://player/player_camera.gd" id="1_itl3e"]
+
+[node name="PlayerCamera" type="Node3D" unique_id=454988981]
+script = ExtResource("1_itl3e")
+
+[node name="Pivot" type="Node3D" parent="." unique_id=695446500]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.1172013)
+
+[node name="Camera" type="Camera3D" parent="Pivot" unique_id=574078493]
