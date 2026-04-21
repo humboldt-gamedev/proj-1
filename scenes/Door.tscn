@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://db46f6dhsh1lp"]
+
+[ext_resource type="PackedScene" uid="uid://csutik2w5pxs5" path="res://assets/generic door.glb" id="1_yfgsh"]
+[ext_resource type="Script" uid="uid://ctox0rnj0vdms" path="res://scripts/interactable_door.gd" id="2_mg2as"]
+[ext_resource type="PackedScene" uid="uid://bopa6r1mrff6k" path="res://scenes/interacion_zone.tscn" id="3_1ebfc"]
+
+[node name="Node3D" type="Node3D" unique_id=668108465]
+
+[node name="generic door" parent="." unique_id=1918173930 instance=ExtResource("1_yfgsh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04896164, 0, 0.047819614)
+script = ExtResource("2_mg2as")
+
+[node name="Cube_001" parent="generic door" index="0" unique_id=1503542324]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.9272704)
+
+[node name="Interacion Zone" parent="." unique_id=2077846025 instance=ExtResource("3_1ebfc")]
+InteractType = 2
+prompt_text = "Press E to open door"
+target_object = NodePath("../generic door")
+
+[node name="CollisionShape3D" parent="Interacion Zone" index="0" unique_id=1064221417]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8205261, 0, 1.0072021)
+
+[editable path="generic door"]
+[editable path="Interacion Zone"]

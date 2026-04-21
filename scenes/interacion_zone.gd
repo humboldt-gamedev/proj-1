@@ -90,6 +90,10 @@ func _process(delta: float) -> void:
 				pass
 			InteractionType.TRIGGER_EVENT:
 				#branch for trigger event code
+				if target.has_method("activate"):
+					target.activate()
+				else:
+					push_warning("Target does not have 'activate' method.")
 				pass
 			_:
 				#catch all

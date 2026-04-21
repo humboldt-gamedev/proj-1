@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://ducu7f5r0bpsh" path="res://scenes/interacion_zone.gd" id="1_n0rgq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nhqxr"]
-size = Vector3(4.2020874, 1, 7.0144043)
+size = Vector3(3.4389648, 1, 5)
 
 [node name="Interacion Zone" type="Area3D" unique_id=2077846025]
 script = ExtResource("1_n0rgq")

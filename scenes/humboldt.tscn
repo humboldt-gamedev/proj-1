@@ -5,8 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://bopa6r1mrff6k" path="res://scenes/interacion_zone.tscn" id="2_0mn4i"]
 [ext_resource type="PackedScene" uid="uid://by6t4045wju47" path="res://scenes/camera_zone.tscn" id="3_vid5m"]
 [ext_resource type="PackedScene" uid="uid://nnmoahp0jfmh" path="res://player/player_camera.tscn" id="4_y541u"]
-[ext_resource type="Script" uid="uid://ctox0rnj0vdms" path="res://scripts/interactable.gd" id="5_mmslu"]
+[ext_resource type="Script" uid="uid://ctox0rnj0vdms" path="res://scripts/interactable_door.gd" id="5_mmslu"]
 [ext_resource type="PackedScene" uid="uid://bdl0efgy8h7po" path="res://scenes/gist_hall.tscn" id="6_jmbf8"]
+[ext_resource type="PackedScene" uid="uid://db46f6dhsh1lp" path="res://scenes/Door.tscn" id="8_n4426"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_njsn1"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -102,6 +103,12 @@ shape = SubResource("SphereShape3D_0mn4i")
 [node name="gist_hall" parent="." unique_id=1393554551 instance=ExtResource("6_jmbf8")]
 transform = Transform3D(0.11844048, 0, 0, 0, 0.11844048, 0, 0, 0, 0.11844048, -38.849, 0.15, -53.186)
 
+[node name="Node3D" parent="." unique_id=668108465 instance=ExtResource("8_n4426")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.641001, -0.0036211014, -1.8910856)
+
 [editable path="Interacion Zone"]
 [editable path="CameraZone 1"]
 [editable path="CameraZone 2"]
+[editable path="Node3D"]
+[editable path="Node3D/generic door"]
+[editable path="Node3D/Interacion Zone"]
